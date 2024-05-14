@@ -6,6 +6,7 @@
 </head>
 <body>
   <script>
+
     // My JavaScript goes here!
     // function that randomly returns rock, paper or scissors
     // function named getComputerChoice
@@ -13,19 +14,85 @@
     // use Math.random (random number between 0 and 1)
     // use console.log to test the return of the funcion
 
-   function getComputerChoice(Rock, Paper, Scissor) {
-   return Math.floor(Math.random() * max)
-   };
+   
+   function getComputerChoice() {
 
-   if (getComputerChoice = 0) {
-    console.log("Rock");
-   } else if (getComputerChoice = 1) {
-    console.log("Paper")
+   let num = Math.floor(Math.random() * 3);
+
+    if (num == 0) {
+    return "rock";
+   } else if (num == 1) {
+    return "paper";
    } else {
-    console.log("Scissor");
+    return "scissor";
+  }
    }
 
-    console.log(getComputerChoice);
+  console.log(getComputerChoice());
+
+  
+  let choice = prompt("Choose between Rock, Paper or Scissor.");
+  let cChoice = choice.toLowerCase();       // Case Insensitive
+  
+
+  function getHumanChoice() {
+    if (cChoice == "rock") {
+      return "rock";
+    } else if (cChoice == "paper") {
+      return "paper";
+    } else if (cChoice == "scissor") {
+      return "scissor";
+    } else {
+      alert("You can only choose between Rock, Paper or Scissor.");
+    }
+  }
+
+  console.log(getHumanChoice());
+
+  let humanScore = 0
+  let computerScore = 0
+
+ // function playGame() {
+  
+  //for (var i = 0; i < 4; i++) {
+ //   playRound();
+ // }
+
+const humanChoice = getHumanChoice();
+const computerChoice = getComputerChoice();
+
+  function playRound(humanChoice, computerChoice) {
+
+    if (humanChoice == computerChoice) {
+      console.log("It's a tie!")
+    } else if (humanChoice == "rock" && computerChoice == "paper") {
+        console.log("You lose! It's crazy but Paper beats Rock!")
+        computerScore + 1
+    } else if (humanChoice == "rock" && computerChoice == "scissor") {
+        console.log("You win! Rock beats Scissor!")
+        humanScore + 1
+    } else if (humanChoice == "paper" && computerChoice == "rock") {
+        console.log("You win! It's crazy but Paper beats Rock!")
+        humanScore + 1
+    } else if (humanChoice == "paper" && computerChoice == "scissor") {
+        console.log("You lose! Scissor beats Paper!")
+        computerScore + 1
+    } else if (humanChoice == "scissor" && computerChoice == "rock") {
+        console.log("You lose! Rock beats Scissor!")
+        computerScore + 1
+    } else {
+        console.log("You win! Scissor beats Paper!")
+        humanScore + 1
+    }
+  }
+
+
+  playRound(humanChoice, computerChoice);
+
+
+ // }
+
+
   </script>
 </body>
 </html>
