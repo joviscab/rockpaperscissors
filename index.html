@@ -106,20 +106,18 @@ const buttons = document.querySelectorAll("button");
 
       document.getElementById("result").textContent = `You tied! ${humanChoice} ties with ${computerChoice}.`;
       console.log(`You tied! ${humanChoice} ties with ${computerChoice}`);
-    } 
-    else if ((humanChoice === 'rock' && computerChoice === 'scissors') ||
-        (humanChoice === 'scissors' && computerChoice === 'paper') ||
-        (humanChoice === 'paper' && computerChoice === 'rock')) {
-      
+    } else if ((humanChoice === 'rock' && computerChoice === 'scissors') ||
+             (humanChoice === 'scissors' && computerChoice === 'paper') ||
+             (humanChoice === 'paper' && computerChoice === 'rock')) {
       document.getElementById("result").textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
       console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-            humanScore += 1;
-        }
-    else {
-
+      humanScore += 1;
+      document.getElementById("score").textContent = `Player: ${humanScore} vs. Computer: ${computerScore}.`;
+    } else {
       document.getElementById("result").textContent = `You lost! ${computerChoice} beats ${humanChoice}.`;
       console.log(`You lost! ${computerChoice} beats ${humanChoice}.`);
-            computerScore += 1;
+      computerScore += 1;
+      document.getElementById("score").textContent = `Player: ${humanScore} vs. Computer: ${computerScore}.`;
       }
     }
 
