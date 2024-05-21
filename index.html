@@ -5,11 +5,46 @@
   <title>Rock Paper Scissors!</title>
 </head>
 <body>
+
+  <h1>Rock, Paper, Scissors</h1>
+
+  <div id="container">
+    <h3>Choose between rock, paper or scissors:</h3>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+  </div>
+  <div id="selectiontitle">
+    <h3>Your selection:</h3>
+  </div>
+  <div id="selection">
+    <h3></h3>
+  </div>
+  <div id="computerselection">
+    <h3>Computer selection:</h3>
+  </div>
+  <div id="pcselection">
+    <h3></h3>
+  </div>
+  <div id="resulttitle">
+    <h3>Result:</h3>
+  </div>
+  <div id="result">
+    <h3></h3>
+  </div>
+  <div id="scoretitle">
+    <h3>Score:</h3>
+  </div>
+  <div id="score">
+    <h3></h3>
+  </div>
   <script>
   
   //Game Score
   let humanScore = 0
   let computerScore = 0
+  document.getElementById("score").textContent = `Player: ${humanScore} vs. Computer: ${computerScore}.`;
+
 
   //Function to select the computer choice
    function getComputerChoice() {
@@ -18,50 +53,76 @@
     
     if (choice <= 0.33){
       console.log('Computer: rock');
+      document.getElementById("pcselection").textContent = `The computer selected rock.`;
       return ('rock');
     }
     else if (choice <= 0.66){
       console.log('Computer: paper');
+      document.getElementById("pcselection").textContent = `The computer selected paper.`;
       return ('paper');
     }
     else {
       console.log('Computer: scissors');
+      document.getElementById("pcselection").textContent = `The computer selected scissors.`;
       return ('scissors');
     }
   }
 
   //Function to get the player's choice
-  function getHumanChoice() {
-    let choice = prompt("Choose between rock, paper or scissors?").toLowerCase();
-    const options = ['rock', 'paper', 'scissors'];
+ function getHumanChoice() {
+   let choice = prompt("Choose between rock, paper or scissors").toLowerCase();
+   const options = ['rock', 'paper', 'scissors'];
 
-    while(!options.includes(choice)){
+   while(!options.includes(choice)){
       console.log('Choose only rock, paper or scissors');
-      choice = prompt("rock, paper or scissors?").toLowerCase();
+     choice = prompt("rock, paper or scissors?").toLowerCase();
     }
 
     console.log('Player: ' + choice);
     return choice;
   }
 
+// Eventlisteners to the buttons
+
+const buttons = document.querySelectorAll("button");
+
+    buttons.forEach((button) => {
+
+      button.addEventListener("click", () => {
+        const selection = button.id;
+        document.getElementById("selection").textContent = `You selected ${selection}!`;
+        const computerSelection = getComputerChoice();
+        playRound(selection, computerSelection);
+
+});
+
+
+
+
 //Round function
   function playRound(humanChoice, computerChoice) {
 
     if (humanChoice === computerChoice) {
+
+      document.getElementById("result").textContent = `You tied! ${humanChoice} ties with ${computerChoice}.`;
       console.log(`You tied! ${humanChoice} ties with ${computerChoice}`);
     } 
     else if ((humanChoice === 'rock' && computerChoice === 'scissors') ||
         (humanChoice === 'scissors' && computerChoice === 'paper') ||
         (humanChoice === 'paper' && computerChoice === 'rock')) {
-            console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+      
+      document.getElementById("result").textContent = `You win! ${humanChoice} beats ${computerChoice}.`;
+      console.log(`You win! ${humanChoice} beats ${computerChoice}`);
             humanScore += 1;
         }
     else {
+
+      document.getElementById("result").textContent = `You lost! ${computerChoice} beats ${humanChoice}.`;
       console.log(`You lost! ${computerChoice} beats ${humanChoice}.`);
             computerScore += 1;
       }
     }
-  
+
     //Game Function
     function playGame(){
       const humanSelection = getHumanChoice();
@@ -69,15 +130,16 @@
 
       playRound (humanSelection, computerSelection);
     }
-    
+    });
+
     for (let i = 0; i < 5; i++) {
       playGame();
     }
     if (humanScore > computerScore) {
-      console.log(`You won the game with a score of ${humanScore} to ${computerScore}`);
+      alert(`You won the game with a score of ${humanScore} to ${computerScore}`);
     }
     else {
-      console.log(`You lost the game with a score of ${humanScore} to ${computerScore}`);
+      alert(`You lost the game with a score of ${humanScore} to ${computerScore}`);
     }
 
   </script>
